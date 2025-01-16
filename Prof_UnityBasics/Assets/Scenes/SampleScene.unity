@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   step: {x: 3, y: 1, z: 0}
-  timeLeft: 0
+  moveDist: 5
 --- !u!65 &900338244
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -461,8 +461,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8710ed8bec85d4c91b7108a3d843aae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  step: {x: -2, y: 0, z: 0}
-  timeLeft: 3
+  step: {x: -3, y: 0, z: 0}
+  moveDist: 1
 --- !u!135 &1056291475
 SphereCollider:
   m_ObjectHideFlags: 0
