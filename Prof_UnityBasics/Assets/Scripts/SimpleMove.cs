@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class SimpleMove : MonoBehaviour
 {
-    public Vector3 step;
+    //Components Connected to the same gameObject as this one.
+    MeshRenderer myRend;
+
+    public float speed;
+
+    //public Vector3 step;
     //public float moveTime;
     //private float timeLeft;
 
-    public float moveDist;
-    private float distLeft;
+    //public float moveDist;
+    //private float distLeft;
 
     // Start is called before the first frame update
     void Start()
     {
+        //init my components
+        myRend = GetComponent<MeshRenderer>();  
+
         //timeLeft = moveTime;
-        distLeft = moveDist;
+        //distLeft = moveDist;
     }
 
     // Update is called once per frame
@@ -34,6 +42,7 @@ public class SimpleMove : MonoBehaviour
         }
         timeLeft -= Time.deltaTime;
         */
+        /*
         if(distLeft > 0) {
             transform.position += (step * Time.deltaTime);
             distLeft -= step.magnitude * Time.deltaTime;
@@ -42,10 +51,21 @@ public class SimpleMove : MonoBehaviour
             step = -1 * step;
             distLeft = moveDist;
         }
+        */
 
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
 
-
-
-
+        Vector3 vec = new Vector3(h, v, 0);
+        transform.position += vec * Time.deltaTime * speed;
     }
+
+    //Called when my gameObject collides with another
+    //Requires at least 1 of the gameObjects to have a Rigidbody.
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject otherGO = collision.gameObject;
+        //Do Stuff
+        myRend.enabled = !myRend.enabled;
+    }    
 }
