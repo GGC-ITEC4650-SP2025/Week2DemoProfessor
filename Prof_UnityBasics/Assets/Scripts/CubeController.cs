@@ -5,7 +5,7 @@ using UnityEngine;
 public class CubeController : MonoBehaviour
 {
     //Components Connected to the same gameObject as this one.
-    //ComponentType1 myCom1;
+    MeshRenderer myRend;
     //ComponentType2 myCom2;
 
     //Components Connected to other gameObjects.
@@ -21,7 +21,8 @@ public class CubeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //init my components
+        myRend = GetComponent<MeshRenderer>();  
     }
 
     // Update is called once per frame
@@ -37,6 +38,7 @@ public class CubeController : MonoBehaviour
         GameObject otherGO = collision.gameObject;
         //Do Stuff
         print(gameObject.name + " got hit by " + otherGO.name);
+        myRend.enabled = !myRend.enabled;
     }
 
     //Called when my gameObject overlaps (triggers) with another
