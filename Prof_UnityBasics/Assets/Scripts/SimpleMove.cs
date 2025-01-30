@@ -36,6 +36,8 @@ public class SimpleMove : MonoBehaviour
         }
         timeLeft -= Time.deltaTime;
         */
+
+        //move based on distance and reverse directions        
         /*
         if(distLeft > 0) {
             transform.position += (step * Time.deltaTime);
