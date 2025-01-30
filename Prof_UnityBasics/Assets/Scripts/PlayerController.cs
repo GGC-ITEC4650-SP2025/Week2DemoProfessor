@@ -9,12 +9,14 @@ public class PlayerController : MonoBehaviour
 
     private int score;
     private GameObject[] allBlueCols;
+    private bool onGround;
 
     //Components Connected to the same gameObject as this one.
     Rigidbody myBod;
 
     void Start()
     {
+        onGround = false;
         //init my components
         myBod = GetComponent<Rigidbody>();
         score = 0;
@@ -25,13 +27,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Jump")) {
-            myBod.velocity = new Vector3(0, jumpPower, 0); 
+        if(Input.GetButtonDown("Jump") && onGround) {
+            myBod.velocity += new Vector3(0, jumpPower, 0); 
         }
 
         float h = Input.GetAxis("Horizontal");
         Vector3 step = new Vector3(speed * h, 0, 0);
-        transform.position += step * Time.deltaTime;
+        //transform.position += step * Time.deltaTime;
+        myBod.velocity += step * Time.deltaTime;
 
         if(Input.GetButtonDown("Fire1")) {
             if(Time.timeScale == 0)
@@ -57,5 +60,36 @@ public class PlayerController : MonoBehaviour
                 t.position += new Vector3(0, 2, 0);
             }
         }
-    }    
+    }   
+
+    //Called when my gameObject overlaps (triggers) with another
+    //Requires at least 1 of the gameObjects to have a Rigidbody or CharacterController.
+    private void OnTriggerEnter(Collider other)
+    {
+        GameObject otherGO = other.gameObject;
+        //Do Stuff
+        if(otherGO.name == "Goal")
+        {
+            print("Winner Winner Chicken Dinner!");
+            Time.timeScale = 0;
+        } 
+        else if(otherGO.name == "Death")
+        {
+            print("Game Over!");
+            Time.timeScale = 0;
+        }
+        else {
+            onGround = true;
+        }
+
+
+    } 
+
+    private void OnTriggerExit(Collider other)
+    {
+        GameObject otherGO = other.gameObject;
+        //Do Stuff
+        onGround = false;
+    } 
+
 }
