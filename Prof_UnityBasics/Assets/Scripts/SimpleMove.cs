@@ -49,6 +49,7 @@ public class SimpleMove : MonoBehaviour
         }
         */
 
+        //move based on user input (WASD)
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
